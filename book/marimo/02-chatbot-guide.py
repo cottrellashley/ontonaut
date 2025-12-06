@@ -154,8 +154,8 @@ def _(mo):
 
 
 @app.cell
-def _(ChatBot):
-    from ontonaut.handlers import EchoHandler, MCPHandler
+def _(ChatBot, EchoHandler):
+    from ontonaut.handlers import MCPHandler
 
     # Define your tools
     def calculator_tool(expression: str) -> str:
@@ -186,7 +186,7 @@ def _(ChatBot):
         handler=mcp_handler, placeholder="Ask about weather or calculations..."
     )
     chatbot4
-    return (EchoHandler,)
+    return (MCPHandler,)
 
 
 @app.cell
