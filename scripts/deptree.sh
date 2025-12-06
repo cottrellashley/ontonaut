@@ -5,6 +5,17 @@
 
 set -e
 
+# Ensure we're in the project root
+cd "$(dirname "$0")/.."
+
+# Activate virtual environment if it exists
+if [ -d ".venv" ]; then
+    source .venv/bin/activate
+else
+    echo "❌ Virtual environment not found. Run ./scripts/setup.sh first."
+    exit 1
+fi
+
 echo "📦 Ontonaut Dependency Tree"
 echo "=============================="
 echo ""
