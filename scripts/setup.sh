@@ -33,11 +33,22 @@ fi
 echo ""
 echo "✅ Setup complete!"
 echo ""
-echo "To activate the virtual environment, run:"
+echo "⚡ To activate the virtual environment in your current shell:"
+echo ""
 echo "   source .venv/bin/activate"
 echo ""
-echo "To run tests:"
-echo "   ./scripts/test.sh"
+echo "📝 Quick tip: You can also run setup and activate in one command:"
 echo ""
-echo "To build the package:"
-echo "   ./scripts/build.sh"
+echo "   source scripts/setup.sh   (instead of ./scripts/setup.sh)"
+echo ""
+echo "Once activated, you can:"
+echo "  • Run tests:  ./scripts/test.sh  or  make test"
+echo "  • Run linter: ./scripts/ruff.sh  or  make ruff"
+echo "  • Build pkg:  ./scripts/build.sh or  make build"
+echo ""
+
+# If the script was sourced (not executed), activate automatically
+if [[ "${BASH_SOURCE[0]}" != "${0}" ]]; then
+    echo "🎉 Virtual environment activated! You're ready to go."
+    echo ""
+fi

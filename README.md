@@ -12,10 +12,11 @@ Ontonaut provides beautiful, marimo-compatible widgets for code execution and AI
 
 ### CodeEditor Widget
 - 🎨 **Clean, marimo-style UI** - Seamless integration with marimo's aesthetic
+- 🌈 **Syntax highlighting** - Professional CodeMirror 6 editor with language-aware colors
 - 🔌 **Pluggable executors** - Python, JSON, Calculator, Regex, or your own
 - 🛠️ **Custom languages** - Create DSLs and custom interpreters
-- ⌨️ **Keyboard shortcuts** - Cmd/Ctrl+Enter to run
-- 🌓 **Light & dark themes** - Follows your marimo theme
+- ⌨️ **Keyboard shortcuts** - Cmd/Ctrl+Enter to run, bracket matching, undo/redo
+- 🌓 **Light & dark themes** - Beautiful OneDark theme for dark mode
 
 ### ChatBot Widget
 - 💬 **Streaming responses** - Real-time, token-by-token output
@@ -188,17 +189,37 @@ chatbot = ChatBot(handler=my_handler)
 ```bash
 git clone https://github.com/yourusername/ontonaut.git
 cd ontonaut
-make setup
+
+# Option 1: Setup and activate in one command (recommended)
+source scripts/setup.sh
+
+# Option 2: Setup then activate manually
+./scripts/setup.sh
+source .venv/bin/activate
 ```
+
+The setup script will:
+- ✅ Create virtual environment (`.venv`)
+- ✅ Install package with dev dependencies
+- ✅ Install pre-commit hooks
+- ✅ Activate venv (if sourced)
 
 ### Commands
 
 ```bash
-make test     # Run tests with coverage
-make lint     # Run linters (black, ruff, mypy)
-make format   # Format code
-make build    # Build package
-make clean    # Clean artifacts
+make test      # Run tests with coverage
+make lint      # Run linters (black, ruff, mypy)
+make format    # Format code
+make build     # Build package
+make clean     # Clean artifacts and .venv
+make deptree   # Show dependency tree
+```
+
+Or use scripts directly:
+```bash
+./scripts/test.sh    # Run tests
+./scripts/ruff.sh    # Run ruff linter
+./scripts/build.sh   # Build distribution
 ```
 
 ### Project Structure
@@ -241,17 +262,20 @@ Coverage: **85%+** across all components
 ## 🎯 Roadmap
 
 ### CodeEditor
-- [ ] Syntax highlighting
-- [ ] Code completion
+- [x] ~~Syntax highlighting~~ ✅ (CodeMirror 6)
+- [ ] Code completion / IntelliSense
 - [ ] Multi-file support
 - [ ] Debugger integration
+- [ ] More language support (SQL, Markdown, etc.)
 
 ### ChatBot
-- [ ] Syntax highlighting for code blocks
-- [ ] Copy-to-clipboard
-- [ ] Tab persistence
-- [ ] Export conversations
+- [x] ~~Syntax highlighting for code blocks~~ ✅ (Markdown support)
+- [x] ~~Tab history~~ ✅
+- [ ] Copy-to-clipboard button
+- [ ] Tab persistence across sessions
+- [ ] Export conversations to file
 - [ ] Async handler support
+- [ ] Streaming progress indicators
 
 ## 🤝 Contributing
 
