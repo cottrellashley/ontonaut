@@ -120,7 +120,7 @@ class OpenAIHandler(BaseHandler):
         try:
             stream = self.client.chat.completions.create(
                 model=self.model,
-                messages=self.conversation_history,  # type: ignore[arg-type]
+                messages=self.conversation_history,
                 temperature=self.temperature,
                 max_tokens=self.max_tokens,
                 stream=True,
@@ -129,8 +129,8 @@ class OpenAIHandler(BaseHandler):
 
             full_response = ""
             for chunk in stream:
-                if chunk.choices[0].delta.content:  # type: ignore[union-attr]
-                    content = chunk.choices[0].delta.content  # type: ignore[union-attr]
+                if chunk.choices[0].delta.content:
+                    content = chunk.choices[0].delta.content
                     full_response += content
                     yield content
 
