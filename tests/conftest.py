@@ -1,6 +1,7 @@
 """Pytest configuration and fixtures."""
 
 import pytest
+
 from ontonaut import CodeEditor
 from ontonaut.executors import PythonExecutor
 

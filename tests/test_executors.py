@@ -3,6 +3,7 @@
 import json
 
 import pytest
+
 from ontonaut.executors import (
     CalculatorExecutor,
     JSONExecutor,
