@@ -1,4 +1,4 @@
-.PHONY: help setup test test-fast test-integration lint format ruff ruff-fix build clean dev check all black mypy
+.PHONY: help setup test test-fast test-integration lint format ruff ruff-fix build clean dev check all black mypy deptree
 
 help: ## Show this help message
 	@echo "Usage: make [target]"
@@ -46,6 +46,9 @@ build: ## Build the package
 
 clean: ## Clean build artifacts and cache files
 	@./scripts/clean.sh
+
+deptree: ## Show dependency tree
+	@./scripts/deptree.sh
 
 check: lint test ## Run all checks (lint + test)
 
