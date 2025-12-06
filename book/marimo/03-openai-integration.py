@@ -25,25 +25,30 @@ def _(ChatBot, os):
     # Get API key from .env
     api_key = os.getenv("OPENAI_API_KEY")
 
-    # Initialize OpenAI client
-    client = openai.OpenAI(api_key=api_key)
+    if api_key:
+        # Initialize OpenAI client
+        client = openai.OpenAI(api_key=api_key)
 
-    # Define streaming handler
-    def stream_openai(user_input: str):
-        """Stream from OpenAI GPT-4."""
-        stream = client.chat.completions.create(
-            model="gpt-4",
-            messages=[{"role": "user", "content": user_input}],
-            stream=True,
-        )
+        # Define streaming handler
+        def stream_openai(user_input: str):
+            """Stream from OpenAI GPT-4."""
+            stream = client.chat.completions.create(
+                model="gpt-4",
+                messages=[{"role": "user", "content": user_input}],
+                stream=True,
+            )
 
-        for chunk in stream:
-            if chunk.choices[0].delta.content:
-                yield chunk.choices[0].delta.content
+            for chunk in stream:
+                if chunk.choices[0].delta.content:
+                    yield chunk.choices[0].delta.content
 
-    # Create widget
-    chatbot = ChatBot(handler=stream_openai, theme="dark")
-    chatbot
+        # Create widget
+        chatbot = ChatBot(handler=stream_openai, theme="dark")
+        chatbot
+    else:
+        print("⚠️ Set OPENAI_API_KEY environment variable to use this example")
+        print("\n1. Create a .env file with: OPENAI_API_KEY=your-key-here")
+        print("2. Or export OPENAI_API_KEY=your-key-here")
     return
 
 
