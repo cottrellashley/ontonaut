@@ -153,6 +153,7 @@
 }
 
 .ontonaut-editor {
+  position: relative;
   flex: 1;
   padding: 12px;
   font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
@@ -164,12 +165,17 @@
   min-height: 150px;
   background: white;
   color: #24292e;
+  caret-color: #10b981;
   tab-size: 4;
+  z-index: 2;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .ontonaut-container[data-theme="dark"] .ontonaut-editor {
   background: #1e1e1e;
   color: #d4d4d4;
+  caret-color: #10b981;
 }
 
 .ontonaut-editor:focus {
@@ -180,9 +186,90 @@
   background: #252525;
 }
 
-.ontonaut-editor::placeholder {
+/* Selection styling */
+.ontonaut-editor::selection {
+  background: rgba(16, 185, 129, 0.3);
+}
+
+.ontonaut-editor::-moz-selection {
+  background: rgba(16, 185, 129, 0.3);
+}
+
+.ontonaut-editor[data-placeholder]:empty:before {
+  content: attr(data-placeholder);
   color: #6a737d;
   font-style: italic;
+  pointer-events: none;
+}
+
+.ontonaut-container[data-theme="dark"] .ontonaut-editor[data-placeholder]:empty:before {
+  color: #6b7280;
+}
+
+/* Syntax Highlighting Colors - Light Theme */
+.ontonaut-editor .syntax-keyword {
+  color: #d73a49;
+  font-weight: 600;
+}
+
+.ontonaut-editor .syntax-string {
+  color: #032f62;
+}
+
+.ontonaut-editor .syntax-number {
+  color: #005cc5;
+}
+
+.ontonaut-editor .syntax-comment {
+  color: #6a737d;
+  font-style: italic;
+}
+
+.ontonaut-editor .syntax-function {
+  color: #6f42c1;
+  font-weight: 600;
+}
+
+.ontonaut-editor .syntax-decorator {
+  color: #6f42c1;
+}
+
+.ontonaut-editor .syntax-key {
+  color: #005cc5;
+  font-weight: 600;
+}
+
+/* Syntax Highlighting Colors - Dark Theme */
+.ontonaut-container[data-theme="dark"] .ontonaut-editor .syntax-keyword {
+  color: #ff7b72;
+  font-weight: 600;
+}
+
+.ontonaut-container[data-theme="dark"] .ontonaut-editor .syntax-string {
+  color: #a5d6ff;
+}
+
+.ontonaut-container[data-theme="dark"] .ontonaut-editor .syntax-number {
+  color: #79c0ff;
+}
+
+.ontonaut-container[data-theme="dark"] .ontonaut-editor .syntax-comment {
+  color: #8b949e;
+  font-style: italic;
+}
+
+.ontonaut-container[data-theme="dark"] .ontonaut-editor .syntax-function {
+  color: #d2a8ff;
+  font-weight: 600;
+}
+
+.ontonaut-container[data-theme="dark"] .ontonaut-editor .syntax-decorator {
+  color: #d2a8ff;
+}
+
+.ontonaut-container[data-theme="dark"] .ontonaut-editor .syntax-key {
+  color: #79c0ff;
+  font-weight: 600;
 }
 
 /* Output Section */

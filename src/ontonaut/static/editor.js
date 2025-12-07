@@ -3,6 +3,101 @@
  * A clean, marimo-style code editor with custom execution backends
  */
 
+// Simple syntax highlighter for Python
+function highlightPython(code) {
+  // Escape HTML first
+  let html = code
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+
+  // Comments (do first to avoid highlighting within comments)
+  html = html.replace(/(#.*$)/gm, '<span class="syntax-comment">$1</span>');
+
+  // Strings (triple quotes, then single/double)
+  html = html.replace(/("""[\s\S]*?"""|'''[\s\S]*?''')/g, '<span class="syntax-string">$1</span>');
+  html = html.replace(/("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')/g, '<span class="syntax-string">$1</span>');
+
+  // Keywords
+  const keywords = ['def', 'class', 'if', 'elif', 'else', 'for', 'while', 'try', 'except', 'finally',
+                   'with', 'as', 'import', 'from', 'return', 'yield', 'break', 'continue', 'pass',
+                   'raise', 'assert', 'del', 'global', 'nonlocal', 'lambda', 'and', 'or', 'not',
+                   'is', 'in', 'True', 'False', 'None', 'async', 'await'];
+  const keywordPattern = new RegExp(`\\b(${keywords.join('|')})\\b`, 'g');
+  html = html.replace(keywordPattern, '<span class="syntax-keyword">$1</span>');
+
+  // Numbers
+  html = html.replace(/\b(\d+\.?\d*|\.\d+)\b/g, '<span class="syntax-number">$1</span>');
+
+  // Function definitions
+  html = html.replace(/\b(def)\s+([a-zA-Z_][a-zA-Z0-9_]*)/g,
+    '<span class="syntax-keyword">$1</span> <span class="syntax-function">$2</span>');
+
+  // Decorators
+  html = html.replace(/^(\s*)(@[a-zA-Z_][a-zA-Z0-9_]*)/gm,
+    '$1<span class="syntax-decorator">$2</span>');
+
+  return html;
+}
+
+function highlightJavaScript(code) {
+  let html = code
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+
+  // Comments
+  html = html.replace(/(\/\/.*$)/gm, '<span class="syntax-comment">$1</span>');
+  html = html.replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="syntax-comment">$1</span>');
+
+  // Strings
+  html = html.replace(/(`(?:[^`\\]|\\.)*`|"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')/g, '<span class="syntax-string">$1</span>');
+
+  // Keywords
+  const keywords = ['function', 'const', 'let', 'var', 'if', 'else', 'for', 'while', 'do',
+                   'switch', 'case', 'break', 'continue', 'return', 'try', 'catch', 'finally',
+                   'throw', 'new', 'class', 'extends', 'import', 'export', 'default', 'async', 'await'];
+  const keywordPattern = new RegExp(`\\b(${keywords.join('|')})\\b`, 'g');
+  html = html.replace(keywordPattern, '<span class="syntax-keyword">$1</span>');
+
+  // Numbers
+  html = html.replace(/\b(\d+\.?\d*|\.\d+)\b/g, '<span class="syntax-number">$1</span>');
+
+  return html;
+}
+
+function highlightJSON(code) {
+  let html = code
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+
+  // Strings (keys and values)
+  html = html.replace(/"([^"]+)"(\s*):/g, '<span class="syntax-key">"$1"</span>$2:');
+  html = html.replace(/:\s*"([^"]*)"/g, ': <span class="syntax-string">"$1"</span>');
+
+  // Numbers
+  html = html.replace(/:\s*(-?\d+\.?\d*)/g, ': <span class="syntax-number">$1</span>');
+
+  // Booleans and null
+  html = html.replace(/\b(true|false|null)\b/g, '<span class="syntax-keyword">$1</span>');
+
+  return html;
+}
+
+function highlightCode(code, language) {
+  const lang = language.toLowerCase();
+  if (lang === 'python' || lang === 'py') {
+    return highlightPython(code);
+  } else if (lang === 'javascript' || lang === 'js') {
+    return highlightJavaScript(code);
+  } else if (lang === 'json') {
+    return highlightJSON(code);
+  }
+  // Default: just escape HTML
+  return code.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
 function render({ model, el }) {
   // Create the main container
   const container = document.createElement("div");
@@ -12,13 +107,117 @@ function render({ model, el }) {
   const editorSection = document.createElement("div");
   editorSection.className = "ontonaut-editor-section";
 
-  // Create the textarea for code input
-  const textarea = document.createElement("textarea");
-  textarea.className = "ontonaut-editor";
-  textarea.value = model.get("code");
-  textarea.placeholder = model.get("placeholder");
-  textarea.readOnly = model.get("read_only");
-  textarea.spellcheck = false;
+  // Create contenteditable div for syntax highlighting
+  const editorDiv = document.createElement("div");
+  editorDiv.className = "ontonaut-editor";
+  editorDiv.contentEditable = !model.get("read_only");
+  editorDiv.spellcheck = false;
+  editorDiv.innerHTML = highlightCode(model.get("code"), model.get("language"));
+
+  if (!model.get("code")) {
+    editorDiv.setAttribute("data-placeholder", model.get("placeholder"));
+  }
+
+  // Track plain text content
+  let currentCode = model.get("code");
+
+  // Update highlighting on input
+  let highlightTimer = null;
+  let isHighlighting = false;
+
+  const getCursorPosition = () => {
+    const selection = window.getSelection();
+    if (selection.rangeCount === 0) return 0;
+
+    const range = selection.getRangeAt(0);
+    const preCaretRange = range.cloneRange();
+    preCaretRange.selectNodeContents(editorDiv);
+    preCaretRange.setEnd(range.endContainer, range.endOffset);
+    return preCaretRange.toString().length;
+  };
+
+  const setCursorPosition = (position) => {
+    const selection = window.getSelection();
+    const range = document.createRange();
+
+    let charCount = 0;
+    const nodeStack = [editorDiv];
+    let node;
+    let foundPosition = false;
+
+    while (!foundPosition && (node = nodeStack.pop())) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        const nextCharCount = charCount + node.length;
+        if (position <= nextCharCount) {
+          range.setStart(node, position - charCount);
+          range.collapse(true);
+          foundPosition = true;
+        }
+        charCount = nextCharCount;
+      } else {
+        for (let i = node.childNodes.length - 1; i >= 0; i--) {
+          nodeStack.push(node.childNodes[i]);
+        }
+      }
+    }
+
+    if (foundPosition) {
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+  };
+
+  const applyHighlighting = () => {
+    if (isHighlighting) return;
+    isHighlighting = true;
+
+    const cursorPos = getCursorPosition();
+    const newCode = editorDiv.textContent || "";
+
+    if (newCode !== currentCode) {
+      currentCode = newCode;
+      editorDiv.innerHTML = highlightCode(newCode, model.get("language"));
+
+      // Restore cursor
+      requestAnimationFrame(() => {
+        setCursorPosition(cursorPos);
+        isHighlighting = false;
+      });
+
+      // Update model
+      model.set("code", newCode);
+      model.save_changes();
+
+      // Update placeholder
+      if (newCode) {
+        editorDiv.removeAttribute("data-placeholder");
+      } else {
+        editorDiv.setAttribute("data-placeholder", model.get("placeholder"));
+      }
+    } else {
+      isHighlighting = false;
+    }
+  };
+
+  const scheduleHighlighting = () => {
+    // Update model immediately for responsiveness
+    const newCode = editorDiv.textContent || "";
+    if (newCode !== currentCode) {
+      currentCode = newCode;
+      model.set("code", newCode);
+      model.save_changes();
+    }
+
+    // Debounce highlighting update
+    clearTimeout(highlightTimer);
+    highlightTimer = setTimeout(applyHighlighting, 300);
+  };
+
+  editorDiv.addEventListener("input", scheduleHighlighting);
+  editorDiv.addEventListener("blur", () => {
+    clearTimeout(highlightTimer);
+    applyHighlighting();
+  });
 
   // Add line numbers if enabled
   if (model.get("line_numbers")) {
@@ -27,7 +226,7 @@ function render({ model, el }) {
     editorSection.appendChild(lineNumbersContainer);
 
     const updateLineNumbers = () => {
-      const lines = textarea.value.split("\n").length;
+      const lines = (editorDiv.textContent || "").split("\n").length;
       lineNumbersContainer.innerHTML = Array.from(
         { length: lines },
         (_, i) => `<div class="line-number">${i + 1}</div>`
@@ -35,10 +234,10 @@ function render({ model, el }) {
     };
 
     updateLineNumbers();
-    textarea.addEventListener("input", updateLineNumbers);
+    editorDiv.addEventListener("input", updateLineNumbers);
   }
 
-  editorSection.appendChild(textarea);
+  editorSection.appendChild(editorDiv);
 
   // Create the toolbar
   const toolbar = document.createElement("div");
@@ -60,7 +259,7 @@ function render({ model, el }) {
     <span>Run</span>
   `;
   runButton.onclick = () => {
-    model.send({ type: "execute", code: textarea.value });
+    model.send({ type: "execute", code: editorDiv.textContent || "" });
   };
   toolbar.appendChild(runButton);
 
@@ -69,9 +268,11 @@ function render({ model, el }) {
   clearButton.className = "ontonaut-clear-button";
   clearButton.textContent = "Clear";
   clearButton.onclick = () => {
-    textarea.value = "";
+    editorDiv.textContent = "";
+    currentCode = "";
     model.set("code", "");
     model.save_changes();
+    editorDiv.setAttribute("data-placeholder", model.get("placeholder"));
   };
   toolbar.appendChild(clearButton);
 
@@ -101,14 +302,8 @@ function render({ model, el }) {
   container.appendChild(outputSection);
   el.appendChild(container);
 
-  // Sync code changes from frontend to backend
-  textarea.addEventListener("input", () => {
-    model.set("code", textarea.value);
-    model.save_changes();
-  });
-
   // Handle keyboard shortcuts
-  textarea.addEventListener("keydown", (e) => {
+  editorDiv.addEventListener("keydown", (e) => {
     // Cmd/Ctrl + Enter to run
     if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
       e.preventDefault();
@@ -118,19 +313,21 @@ function render({ model, el }) {
     // Tab key for indentation
     if (e.key === "Tab") {
       e.preventDefault();
-      const start = textarea.selectionStart;
-      const end = textarea.selectionEnd;
-      textarea.value = textarea.value.substring(0, start) + "    " + textarea.value.substring(end);
-      textarea.selectionStart = textarea.selectionEnd = start + 4;
-      model.set("code", textarea.value);
-      model.save_changes();
+      document.execCommand("insertText", false, "    ");
     }
   });
 
   // Listen for changes from Python
   model.on("change:code", () => {
-    if (textarea.value !== model.get("code")) {
-      textarea.value = model.get("code");
+    const newCode = model.get("code");
+    if ((editorDiv.textContent || "") !== newCode) {
+      currentCode = newCode;
+      editorDiv.innerHTML = highlightCode(newCode, model.get("language"));
+      if (newCode) {
+        editorDiv.removeAttribute("data-placeholder");
+      } else {
+        editorDiv.setAttribute("data-placeholder", model.get("placeholder"));
+      }
     }
   });
 
@@ -152,6 +349,7 @@ function render({ model, el }) {
 
   model.on("change:language", () => {
     langIndicator.textContent = model.get("language");
+    editorDiv.innerHTML = highlightCode(currentCode, model.get("language"));
   });
 
   model.on("change:theme", () => {
@@ -159,7 +357,7 @@ function render({ model, el }) {
   });
 
   model.on("change:read_only", () => {
-    textarea.readOnly = model.get("read_only");
+    editorDiv.contentEditable = !model.get("read_only");
   });
 
   // Set initial theme

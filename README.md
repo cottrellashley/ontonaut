@@ -12,10 +12,11 @@ Ontonaut provides beautiful, marimo-compatible widgets for code execution and AI
 
 ### CodeEditor Widget
 - 🎨 **Clean, marimo-style UI** - Seamless integration with marimo's aesthetic
+- 🌈 **Syntax highlighting** - Professional CodeMirror 6 editor with language-aware colors
 - 🔌 **Pluggable executors** - Python, JSON, Calculator, Regex, or your own
 - 🛠️ **Custom languages** - Create DSLs and custom interpreters
-- ⌨️ **Keyboard shortcuts** - Cmd/Ctrl+Enter to run
-- 🌓 **Light & dark themes** - Follows your marimo theme
+- ⌨️ **Keyboard shortcuts** - Cmd/Ctrl+Enter to run, bracket matching, undo/redo
+- 🌓 **Light & dark themes** - Beautiful OneDark theme for dark mode
 
 ### ChatBot Widget
 - 💬 **Streaming responses** - Real-time, token-by-token output
@@ -23,6 +24,13 @@ Ontonaut provides beautiful, marimo-compatible widgets for code execution and AI
 - 💻 **Code formatting** - Markdown code blocks render beautifully
 - 🤖 **Multiple handlers** - OpenAI, Anthropic, MCP, or custom
 - 🎯 **Type-safe** - Full type hints throughout
+
+### CodebaseAgent Widget ✨ NEW
+- 🔍 **AI-powered code search** - Ask questions, get relevant code snippets
+- 🏷️ **Smart indexing** - Register types with tags and metadata
+- 📚 **Auto-extraction** - Docstrings, methods, properties extracted automatically
+- 🤖 **Bring your own AI** - Works with OpenAI, Anthropic, or custom company wrappers
+- 🎯 **Context-aware** - Builds intelligent context from your codebase
 
 ## 📦 Installation
 
@@ -59,6 +67,35 @@ chatbot = ChatBot(
 chatbot
 ```
 
+### CodebaseAgent
+
+```python
+from ontonaut import CodebaseAgent, index_type, IndexTag
+import openai
+import os
+
+# 1. Define tags and register your types
+class MyTags(IndexTag):
+    DATABASE = "database"
+    API = "api"
+
+@index_type(tags=[MyTags.DATABASE], instructions="User authentication model")
+class User:
+    """User model with authentication."""
+    def authenticate(self, password: str) -> bool:
+        """Verify user credentials."""
+        return True
+
+# 2. Create agent with your AI client
+agent = CodebaseAgent(
+    ai_client=openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY")),
+    theme="light"
+)
+
+# 3. Ask questions - AI searches your codebase and explains!
+agent
+```
+
 ## 📚 Documentation
 
 ### 📖 User Guides
@@ -78,9 +115,15 @@ Runnable marimo notebooks with examples:
 - **[Getting Started](./book/marimo/01-getting-started.py)** - Basic usage
 - **[ChatBot Guide](./book/marimo/02-chatbot-guide.py)** - Complete chat examples
 - **[OpenAI Integration](./book/marimo/03-openai-integration.py)** - AI integration
+- **[Indexing & Search](./book/marimo/04-indexing-search.py)** - Codebase indexing
+- **[CodebaseAgent Demo](./book/marimo/05-codebase-agent-demo.py)** - AI code search ⚡ **QUICKEST START!**
 
 Run them:
 ```bash
+# Start with the CodebaseAgent demo (requires OPENAI_API_KEY in .env)
+marimo edit book/marimo/05-codebase-agent-demo.py
+
+# Or start with basics
 marimo edit book/marimo/01-getting-started.py
 ```
 
@@ -188,17 +231,37 @@ chatbot = ChatBot(handler=my_handler)
 ```bash
 git clone https://github.com/yourusername/ontonaut.git
 cd ontonaut
-make setup
+
+# Option 1: Setup and activate in one command (recommended)
+source scripts/setup.sh
+
+# Option 2: Setup then activate manually
+./scripts/setup.sh
+source .venv/bin/activate
 ```
+
+The setup script will:
+- ✅ Create virtual environment (`.venv`)
+- ✅ Install package with dev dependencies
+- ✅ Install pre-commit hooks
+- ✅ Activate venv (if sourced)
 
 ### Commands
 
 ```bash
-make test     # Run tests with coverage
-make lint     # Run linters (black, ruff, mypy)
-make format   # Format code
-make build    # Build package
-make clean    # Clean artifacts
+make test      # Run tests with coverage
+make lint      # Run linters (black, ruff, mypy)
+make format    # Format code
+make build     # Build package
+make clean     # Clean artifacts and .venv
+make deptree   # Show dependency tree
+```
+
+Or use scripts directly:
+```bash
+./scripts/test.sh    # Run tests
+./scripts/ruff.sh    # Run ruff linter
+./scripts/build.sh   # Build distribution
 ```
 
 ### Project Structure
@@ -241,17 +304,20 @@ Coverage: **85%+** across all components
 ## 🎯 Roadmap
 
 ### CodeEditor
-- [ ] Syntax highlighting
-- [ ] Code completion
+- [x] ~~Syntax highlighting~~ ✅ (CodeMirror 6)
+- [ ] Code completion / IntelliSense
 - [ ] Multi-file support
 - [ ] Debugger integration
+- [ ] More language support (SQL, Markdown, etc.)
 
 ### ChatBot
-- [ ] Syntax highlighting for code blocks
-- [ ] Copy-to-clipboard
-- [ ] Tab persistence
-- [ ] Export conversations
+- [x] ~~Syntax highlighting for code blocks~~ ✅ (Markdown support)
+- [x] ~~Tab history~~ ✅
+- [ ] Copy-to-clipboard button
+- [ ] Tab persistence across sessions
+- [ ] Export conversations to file
 - [ ] Async handler support
+- [ ] Streaming progress indicators
 
 ## 🤝 Contributing
 

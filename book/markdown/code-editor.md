@@ -17,14 +17,21 @@ editor
 
 ## Features
 
-- ✅ **Syntax Highlighting** - Automatic based on language
-- ✅ **Line Numbers** - Toggle on/off
-- ✅ **Multiple Languages** - Python, JavaScript, JSON, and more
+- ✅ **Syntax Highlighting** - Beautiful, language-aware color coding powered by CodeMirror 6
+  - Keywords in bold red/pink
+  - Strings in blue
+  - Functions in purple
+  - Comments in gray and italic
+  - Numbers in blue
+  - Full bracket matching and active line highlighting
+- ✅ **Line Numbers** - Toggle on/off with gutter highlighting
+- ✅ **Multiple Languages** - Python, JavaScript, JSON with proper syntax highlighting
 - ✅ **Custom Executors** - Plug in your own execution logic
-- ✅ **Real-time Errors** - Immediate error feedback
-- ✅ **Keyboard Shortcuts** - Cmd/Ctrl+Enter to run
-- ✅ **Themes** - Light and dark modes
+- ✅ **Real-time Errors** - Immediate error feedback with red highlighting
+- ✅ **Keyboard Shortcuts** - Cmd/Ctrl+Enter to run, tab indentation, and more
+- ✅ **Themes** - Light and dark modes (OneDark for dark theme)
 - ✅ **Read-only Mode** - Display code without editing
+- ✅ **Professional Editor** - Full CodeMirror experience with history, selections, and more
 
 ## Basic Usage
 
@@ -247,7 +254,84 @@ code = editor.get_code()
 ## Keyboard Shortcuts
 
 - **Cmd/Ctrl + Enter**: Execute code
-- **Tab**: Insert 4 spaces (indentation)
+- **Tab**: Smart indentation (context-aware)
+- **Cmd/Ctrl + Z**: Undo
+- **Cmd/Ctrl + Shift + Z**: Redo
+- **Cmd/Ctrl + /**: Toggle line comment (language-dependent)
+- **Bracket Matching**: Automatic highlighting of matching brackets
+
+## Syntax Highlighting
+
+The editor uses **CodeMirror 6** for professional-grade syntax highlighting that makes your code more readable and helps catch errors visually.
+
+### Color Scheme
+
+#### Light Theme
+- **Keywords** (`def`, `if`, `return`, `class`, etc.): Bold red/pink (#d73a49)
+- **Strings** and **docstrings**: Dark blue (#032f62)
+- **Numbers**: Blue (#005cc5)
+- **Comments**: Gray italic (#6a737d)
+- **Functions**: Purple bold (#6f42c1)
+- **Class names**: Purple bold (#6f42c1)
+- **Operators**: Red (#d73a49)
+- **Brackets**: Blue (#005cc5)
+- **Active line**: Light gray background
+
+#### Dark Theme (OneDark)
+- **Keywords**: Orange/red
+- **Strings**: Green
+- **Numbers**: Orange
+- **Comments**: Gray italic
+- **Functions**: Blue/purple
+- **Operators**: Cyan
+- **Active line**: Subtle gray background
+
+### Supported Languages
+
+Full syntax highlighting support:
+- **Python** - All Python 3 syntax including f-strings, type hints, decorators
+- **JavaScript** - ES6+, JSX, modern JavaScript features
+- **JSON** - Proper JSON validation with error highlighting
+- More languages can be added via CodeMirror language packs
+
+### Example
+
+```python
+# This code demonstrates syntax highlighting
+from ontonaut import CodeEditor, PythonExecutor
+
+code = '''
+def calculate_fibonacci(n: int) -> int:
+    """Calculate the nth Fibonacci number."""
+    if n <= 1:
+        return n
+    else:
+        # Recursive calculation
+        return calculate_fibonacci(n-1) + calculate_fibonacci(n-2)
+
+# Test with different values
+for i in range(10):
+    result = calculate_fibonacci(i)
+    print(f"F({i}) = {result}")
+'''
+
+editor = CodeEditor(
+    executor=PythonExecutor(),
+    code=code,
+    language="python",
+    theme="light"
+)
+editor
+```
+
+In this example, you'll see:
+- `def`, `return`, `if`, `else`, `for`, `in` highlighted as keywords
+- The docstring `"""Calculate..."""` in blue
+- The f-string `f"F({i}) = {result}"` with proper string highlighting
+- Comments `# Recursive calculation` in gray italic
+- Function names `calculate_fibonacci`, `range`, `print` in purple
+- Numbers `1`, `2`, `10` in blue
+- Type hints `: int` and `-> int` with proper syntax coloring
 
 ## Styling
 

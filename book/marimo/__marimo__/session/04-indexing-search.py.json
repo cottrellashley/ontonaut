@@ -1,0 +1,488 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.18.3"
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "1d0db38904205bec4d6f6f6a1f6cec3e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "da9e96220d48eaf6a92b442c6916e878",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"ontonaut-indexing-search-system\">\ud83d\udd0d Ontonaut Indexing &amp; Search System</h1>\n<span class=\"paragraph\">A powerful codebase indexing system for registering types with metadata\nand enabling intelligent code search.</span>\n<span class=\"paragraph\"><strong>Key Features:</strong></span>\n<ul>\n<li>\ud83c\udff7\ufe0f Custom tag taxonomies</li>\n<li>\ud83d\udcda Automatic metadata extraction</li>\n<li>\ud83d\udd0e Powerful search capabilities</li>\n<li>\ud83d\udd12 Thread-safe registry</li>\n<li>\ud83e\udd16 AI agent integration ready</li>\n</ul></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "681fc3b01b6232d2b7068ee70bf04582",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"1-define-your-tag-taxonomy\">1. Define Your Tag Taxonomy</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "161d13801fa7e6b18f9031d0209f0ebb",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "674f772ff7dc5ec372e6583f74f91206",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"2-register-types-with-metadata\">2. Register Types with Metadata</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "PKri",
+      "code_hash": "018cbb2c9ec7c714166ddf9ed190443f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Xref",
+      "code_hash": "dd7e52d225b513e91552449529cb9e36",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "SFPL",
+      "code_hash": "9771a3de5881d62e194b37e3c2600fa5",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "BYtC",
+      "code_hash": "8dff9a14d0171c5d52989957a92cb1a5",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "RGSE",
+      "code_hash": "f5fe60b50fa55b5514da9f10e5b1d8ed",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"3-inspect-registered-type-metadata\">3. Inspect Registered Type Metadata</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Kclp",
+      "code_hash": "69208a3a15f4db991921a81eb273e596",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "emfo",
+      "code_hash": "f76dfca2de11caedab7be89026f474f3",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='emfo-0' random-id='4ed2a50b-4b3e-518b-9861-a5750c6ba8b3'><marimo-table data-initial-value='[]' data-label='&quot;&lt;span class=&#92;&quot;markdown prose dark:prose-invert contents&#92;&quot;&gt;&lt;span class=&#92;&quot;paragraph&#92;&quot;&gt;User Type Metadata&lt;/span&gt;&lt;/span&gt;&quot;' data-data='&quot;[{&#92;&quot;Property&#92;&quot;:&#92;&quot;Name&#92;&quot;,&#92;&quot;Value&#92;&quot;:&#92;&quot;User&#92;&quot;},{&#92;&quot;Property&#92;&quot;:&#92;&quot;Module&#92;&quot;,&#92;&quot;Value&#92;&quot;:&#92;&quot;__main__&#92;&quot;},{&#92;&quot;Property&#92;&quot;:&#92;&quot;Path&#92;&quot;,&#92;&quot;Value&#92;&quot;:&#92;&quot;__main__.User&#92;&quot;},{&#92;&quot;Property&#92;&quot;:&#92;&quot;Tags&#92;&quot;,&#92;&quot;Value&#92;&quot;:&#92;&quot;[&#x27;database&#x27;, &#x27;model&#x27;]&#92;&quot;},{&#92;&quot;Property&#92;&quot;:&#92;&quot;Instructions&#92;&quot;,&#92;&quot;Value&#92;&quot;:&#92;&quot;Primary user model&#92;&quot;},{&#92;&quot;Property&#92;&quot;:&#92;&quot;Docstring&#92;&quot;,&#92;&quot;Value&#92;&quot;:&#92;&quot;User model for authentication and profile management.&#92;&quot;},{&#92;&quot;Property&#92;&quot;:&#92;&quot;Is Abstract&#92;&quot;,&#92;&quot;Value&#92;&quot;:&#92;&quot;False&#92;&quot;}]&quot;' data-total-rows='7' data-total-columns='2' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-selection='&quot;multi&quot;' data-show-filters='false' data-show-download='false' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Hstk",
+      "code_hash": "904084d88eb58a372b37f5595dbe06be",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"methods\">Methods</h3></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "nWHF",
+      "code_hash": "3d45b1f9034d7440d4be23e07b1963e9",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='nWHF-0' random-id='0ab5a9af-fce2-b58c-5191-1d154da749a3'><marimo-table data-initial-value='[]' data-label='&quot;&lt;span class=&#92;&quot;markdown prose dark:prose-invert contents&#92;&quot;&gt;&lt;span class=&#92;&quot;paragraph&#92;&quot;&gt;Public Methods&lt;/span&gt;&lt;/span&gt;&quot;' data-data='&quot;[{&#92;&quot;Method&#92;&quot;:&#92;&quot;authenticate&#92;&quot;,&#92;&quot;Signature&#92;&quot;:&#92;&quot;(self, password: str) -&gt; bool&#92;&quot;,&#92;&quot;Classmethod&#92;&quot;:&#92;&quot;&#92;&quot;,&#92;&quot;Staticmethod&#92;&quot;:&#92;&quot;&#92;&quot;,&#92;&quot;Docstring&#92;&quot;:&#92;&quot;Authenticate user with password.&#92;&#92;n&#92;&#92;nArgs:&#92;&#92;n    password: User p...&#92;&quot;},{&#92;&quot;Method&#92;&quot;:&#92;&quot;create_admin&#92;&quot;,&#92;&quot;Signature&#92;&quot;:&#92;&quot;(username: str) -&gt; &#x27;User&#x27;&#92;&quot;,&#92;&quot;Classmethod&#92;&quot;:&#92;&quot;\u2705&#92;&quot;,&#92;&quot;Staticmethod&#92;&quot;:&#92;&quot;&#92;&quot;,&#92;&quot;Docstring&#92;&quot;:&#92;&quot;Create an admin user.&#92;&quot;},{&#92;&quot;Method&#92;&quot;:&#92;&quot;deactivate&#92;&quot;,&#92;&quot;Signature&#92;&quot;:&#92;&quot;(self) -&gt; None&#92;&quot;,&#92;&quot;Classmethod&#92;&quot;:&#92;&quot;&#92;&quot;,&#92;&quot;Staticmethod&#92;&quot;:&#92;&quot;&#92;&quot;,&#92;&quot;Docstring&#92;&quot;:&#92;&quot;Deactivate user account.&#92;&quot;},{&#92;&quot;Method&#92;&quot;:&#92;&quot;display_name&#92;&quot;,&#92;&quot;Signature&#92;&quot;:&#92;&quot;(property)&#92;&quot;,&#92;&quot;Classmethod&#92;&quot;:&#92;&quot;&#92;&quot;,&#92;&quot;Staticmethod&#92;&quot;:&#92;&quot;&#92;&quot;,&#92;&quot;Docstring&#92;&quot;:&#92;&quot;Get user&#x27;s display name.&#92;&quot;},{&#92;&quot;Method&#92;&quot;:&#92;&quot;is_active&#92;&quot;,&#92;&quot;Signature&#92;&quot;:&#92;&quot;(property)&#92;&quot;,&#92;&quot;Classmethod&#92;&quot;:&#92;&quot;&#92;&quot;,&#92;&quot;Staticmethod&#92;&quot;:&#92;&quot;&#92;&quot;,&#92;&quot;Docstring&#92;&quot;:&#92;&quot;Check if user account is active.&#92;&quot;}]&quot;' data-total-rows='5' data-total-columns='5' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-selection='&quot;multi&quot;' data-show-filters='false' data-show-download='false' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "iLit",
+      "code_hash": "0e12783b3889b0dc0b3f1ca20b93400e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"properties\">Properties</h3></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ZHCJ",
+      "code_hash": "b6057c2e70ec88a9dd0f14f33d02e032",
+      "outputs": [
+        {
+          "type": "error",
+          "ename": "multiple-defs",
+          "evalue": "The variable 'info' was defined by another cell",
+          "traceback": []
+        },
+        {
+          "type": "error",
+          "ename": "multiple-defs",
+          "evalue": "The variable 'name' was defined by another cell",
+          "traceback": []
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ROlb",
+      "code_hash": "8d679438e0f97c33b09f5a9441213cdb",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"4-search-the-registry\">4. Search the Registry</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "qnkX",
+      "code_hash": "a96daaa41596d715d6c5ef6f6ad54f4c",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"search-by-query\">Search by Query</h3></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "TqIu",
+      "code_hash": "d59663bb892221ffca339c098f09394f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Vxnm",
+      "code_hash": "71d8c2e1d849e36e8582df5ac592ac91",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Found <strong>2</strong> types matching 'user':</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "DnEU",
+      "code_hash": "25b5a5ff930219c78d16aa091532aa7a",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='DnEU-0' random-id='9e23a7ed-4169-a7b1-9c52-66f16be5e291'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;Name&#92;&quot;:&#92;&quot;User&#92;&quot;,&#92;&quot;Module&#92;&quot;:&#92;&quot;__main__&#92;&quot;,&#92;&quot;Tags&#92;&quot;:&#92;&quot;database, model&#92;&quot;,&#92;&quot;Docstring&#92;&quot;:&#92;&quot;User model for authentication and profile manageme...&#92;&quot;},{&#92;&quot;Name&#92;&quot;:&#92;&quot;UserService&#92;&quot;,&#92;&quot;Module&#92;&quot;:&#92;&quot;__main__&#92;&quot;,&#92;&quot;Tags&#92;&quot;:&#92;&quot;api, service&#92;&quot;,&#92;&quot;Docstring&#92;&quot;:&#92;&quot;Service layer for user operations.&#92;&quot;}]&quot;' data-total-rows='2' data-total-columns='4' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-selection='&quot;multi&quot;' data-show-filters='false' data-show-download='false' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ulZA",
+      "code_hash": "2e8af0559ba6432fdca067042103a1c3",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"search-by-tags\">Search by Tags</h3></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ecfG",
+      "code_hash": "358ab389fc6e964ba44562c2cd8a1f21",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "application/json": "[\"text/plain:OldEmailChecker (__main__)\"]"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Pvdt",
+      "code_hash": "3e6cc47af4abbe197cd3d81919c4a581",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Tag Search Results:</strong></span>\n<ul>\n<li>Database Models: 1</li>\n<li>Services: 1</li>\n<li>Deprecated: 1</li>\n</ul></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ZBYS",
+      "code_hash": "a65a4ae7c1b0c9ae81840a81200dd97d",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "aLJB",
+      "code_hash": "296e9476845580ae75b88f4cb16c8d70",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"combined-search\">Combined Search</h3></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "nHfw",
+      "code_hash": "a023491e7c54fa25d48999df329a9ad4",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "xXTn",
+      "code_hash": "ee6a030f3f2b8b35f867e8cc72c7cadb",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Found <strong>1</strong> authentication-related database models</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "AjVT",
+      "code_hash": "69fcb36ad5967dd87aa8cbc6e5e70f18",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"5-search-methods-and-properties\">5. Search Methods and Properties</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "pHFh",
+      "code_hash": "77919d51dcaee46a888e224c6c2ba45d",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "application/json": "{\"authenticate\": {\"docstring\": \"Authenticate user with password.\\n\\nArgs:\\n    password: User password\\n\\nReturns:\\n    True if authentication successful\", \"is_classmethod\": false, \"is_staticmethod\": false, \"is_property\": false, \"signature\": \"(self, password: str) -> bool\"}}"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "dNNg",
+      "code_hash": "5f9ea9ee3643d2baa07292efbb54b11e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "yCnT",
+      "code_hash": "43af8f01bd4c5a835d49871281959610",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "wlCL",
+      "code_hash": "3a4764881838896506a7df3c6e7d97e2",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"codebase-context-for-user\">Codebase Context for: user</h1>\n<h2 id=\"mainuser\"><strong>main</strong>.User</h2>\n<span class=\"paragraph\"><strong>Tags:</strong> database, model\n<strong>Description:</strong> User model for authentication and profile management.\n<strong>Instructions:</strong> Primary user model</span>\n<h3 id=\"methods\">Methods:</h3>\n<ul>\n<li>\n<span class=\"paragraph\"><code>authenticate(self, password: str) -&gt; bool</code></span>\n<ul>\n<li>Authenticate user with password.</li>\n</ul>\n</li>\n</ul>\n<span class=\"paragraph\">Args:\n    password: User password</span>\n<span class=\"paragraph\">Returns:\n    True if authentica</span>\n<ul>\n<li>\n<span class=\"paragraph\"><code>create_admin(username: str) -&gt; 'User'</code></span>\n<ul>\n<li>Create an admin user.</li>\n</ul>\n</li>\n<li>\n<span class=\"paragraph\"><code>deactivate(self) -&gt; None</code></span>\n<ul>\n<li>Deactivate user account.</li>\n</ul>\n</li>\n<li>\n<span class=\"paragraph\"><code>display_name(property)</code></span>\n<ul>\n<li>Get user's display name.</li>\n</ul>\n</li>\n<li>\n<span class=\"paragraph\"><code>is_active(property)</code></span>\n<ul>\n<li>Check if user account is active.</li>\n</ul>\n</li>\n</ul>\n<h3 id=\"properties\">Properties:</h3>\n<ul>\n<li><code>display_name</code> - Get user's display name.</li>\n<li><code>is_active</code> - Check if user account is active.</li>\n</ul>\n<h2 id=\"mainuserservice\"><strong>main</strong>.UserService</h2>\n<span class=\"paragraph\"><strong>Tags:</strong> api, service\n<strong>Description:</strong> Service layer for user operations.\n<strong>Instructions:</strong> REST API for user management</span>\n<h3 id=\"methods_1\">Methods:</h3>\n<ul>\n<li>\n<span class=\"paragraph\"><code>create_user(self, username: str, email: str) -&gt; dict</code></span>\n<ul>\n<li>Create a new user account.</li>\n</ul>\n</li>\n</ul>\n<span class=\"paragraph\">Args:\n    username: Unique username\n    email: User email address</span>\n<span class=\"paragraph\">Retur</span>\n<ul>\n<li>\n<span class=\"paragraph\"><code>find_user(self, user_id: int) -&gt; dict</code></span>\n<ul>\n<li>Find user by ID.</li>\n</ul>\n</li>\n</ul>\n<span class=\"paragraph\">Args:\n    user_id: User identifier</span>\n<span class=\"paragraph\">Returns:\n    User data dictionary</span>\n<ul>\n<li>\n<span class=\"paragraph\"><code>list_users(self, limit: int = 100) -&gt; list</code></span>\n<ul>\n<li>List all users.</li>\n</ul>\n</li>\n</ul>\n<span class=\"paragraph\">Args:\n    limit: Maximum number of users to return</span>\n<span class=\"paragraph\">Returns:\n    List of user dicti</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "kqZH",
+      "code_hash": "1c57638b3e7ac08a5aa99af5a761eee7",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"7-summary\">7. Summary</h2>\n<span class=\"paragraph\">The indexing system provides:</span>\n<span class=\"paragraph\">\u2705 <strong>Type Registration</strong> - Decorator or function-based<br />\n\u2705 <strong>Automatic Metadata</strong> - Docstrings, methods, properties<br />\n\u2705 <strong>Custom Tags</strong> - Flexible categorization<br />\n\u2705 <strong>Powerful Search</strong> - Query + tags<br />\n\u2705 <strong>Thread-Safe</strong> - Concurrent access<br />\n\u2705 <strong>AI-Ready</strong> - Easy context building  </span>\n<span class=\"paragraph\"><strong>Use Cases:</strong></span>\n<ul>\n<li>\ud83e\udd16 AI agent code understanding</li>\n<li>\ud83d\udcda Documentation generation</li>\n<li>\ud83d\udd0d Codebase navigation</li>\n<li>\ud83c\udfd7\ufe0f Architecture analysis</li>\n<li>\u26a0\ufe0f Technical debt tracking</li>\n</ul></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "TxIC",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "OCeM",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "NcRr",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    }
+  ]
+}
