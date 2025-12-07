@@ -1,0 +1,60 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.18.3"
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "1d0db38904205bec4d6f6f6a1f6cec3e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "56966bf2a5a688f9885ccc399f7310cc",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>RegisteredType(__main__.EmailValidator, tags=[util])</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "189e372d5baf4c07edae7be43ab71ca5",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "5056473444077b577d6879e3e235fe85",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='bkHC-0' random-id='0a962397-66f0-0649-33b7-4ab79969015c'><marimo-anywidget data-initial-value='{&quot;context&quot;:&quot;&quot;,&quot;error&quot;:&quot;&quot;,&quot;placeholder&quot;:&quot;Ask about your codebase...&quot;,&quot;query&quot;:&quot;&quot;,&quot;response&quot;:&quot;&quot;,&quot;theme&quot;:&quot;dark&quot;}' data-label='null' data-js-url='&quot;./@file/4053-5232357-XRNe1LxV.js&quot;' data-js-hash='&quot;c63a3bb1ab68b5d94ea20f1054b79584&quot;' data-css='&quot;&#92;n    .codebase-agent-container {&#92;n      font-family: -apple-system, BlinkMacSystemFont, &#92;&quot;Segoe UI&#92;&quot;, Roboto, sans-serif;&#92;n      border: 1px solid #e8eaed;&#92;n      border-radius: 8px;&#92;n      background: white;&#92;n      padding: 16px;&#92;n      margin: 12px 0;&#92;n    }&#92;n    &#92;n    .agent-input-section {&#92;n      display: flex;&#92;n      gap: 12px;&#92;n      margin-bottom: 16px;&#92;n    }&#92;n    &#92;n    .agent-input {&#92;n      flex: 1;&#92;n      padding: 10px 14px;&#92;n      font-size: 14px;&#92;n      border: 1px solid #d1d5db;&#92;n      border-radius: 6px;&#92;n      outline: none;&#92;n      transition: border-color 0.2s;&#92;n    }&#92;n    &#92;n    .agent-input:focus {&#92;n      border-color: #10b981;&#92;n      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);&#92;n    }&#92;n    &#92;n    .agent-ask-button {&#92;n      padding: 10px 20px;&#92;n      font-size: 14px;&#92;n      font-weight: 600;&#92;n      background: #10b981;&#92;n      color: white;&#92;n      border: none;&#92;n      border-radius: 6px;&#92;n      cursor: pointer;&#92;n      transition: all 0.2s;&#92;n    }&#92;n    &#92;n    .agent-ask-button:hover {&#92;n      background: #059669;&#92;n      transform: translateY(-1px);&#92;n    }&#92;n    &#92;n    .agent-ask-button:active {&#92;n      transform: translateY(0);&#92;n    }&#92;n    &#92;n    .agent-section-label {&#92;n      font-size: 12px;&#92;n      font-weight: 700;&#92;n      color: #6b7280;&#92;n      text-transform: uppercase;&#92;n      letter-spacing: 0.5px;&#92;n      margin-bottom: 12px;&#92;n      padding-bottom: 8px;&#92;n      border-bottom: 2px solid #e8eaed;&#92;n    }&#92;n    &#92;n    .agent-context-section,&#92;n    .agent-response-section {&#92;n      margin-top: 20px;&#92;n      padding-top: 16px;&#92;n      border-top: 1px solid #e8eaed;&#92;n    }&#92;n    &#92;n    .agent-context-content {&#92;n      font-size: 13px;&#92;n      line-height: 1.6;&#92;n    }&#92;n    &#92;n    .agent-context-item {&#92;n      background: #f9fafb;&#92;n      border-left: 3px solid #10b981;&#92;n      padding: 12px;&#92;n      margin-bottom: 12px;&#92;n      border-radius: 4px;&#92;n    }&#92;n    &#92;n    .agent-context-item-name {&#92;n      font-weight: 600;&#92;n      color: #10b981;&#92;n      margin-bottom: 4px;&#92;n    }&#92;n    &#92;n    .agent-context-item-path {&#92;n      font-size: 11px;&#92;n      color: #6b7280;&#92;n      font-family: monospace;&#92;n      margin-bottom: 8px;&#92;n    }&#92;n    &#92;n    .agent-context-item-doc {&#92;n      color: #374151;&#92;n      margin-bottom: 8px;&#92;n    }&#92;n    &#92;n    .agent-context-item-tags {&#92;n      display: flex;&#92;n      gap: 6px;&#92;n      flex-wrap: wrap;&#92;n    }&#92;n    &#92;n    .agent-context-tag {&#92;n      background: #e8eaed;&#92;n      padding: 2px 8px;&#92;n      border-radius: 12px;&#92;n      font-size: 11px;&#92;n      color: #4b5563;&#92;n    }&#92;n    &#92;n    .agent-response-content {&#92;n      font-size: 14px;&#92;n      line-height: 1.7;&#92;n      color: #1f2937;&#92;n    }&#92;n    &#92;n    .agent-response-content h1,&#92;n    .agent-response-content h2,&#92;n    .agent-response-content h3 {&#92;n      margin-top: 16px;&#92;n      margin-bottom: 8px;&#92;n      color: #111827;&#92;n    }&#92;n    &#92;n    .agent-response-content code {&#92;n      background: #f3f4f6;&#92;n      padding: 2px 6px;&#92;n      border-radius: 3px;&#92;n      font-family: &#92;&quot;SF Mono&#92;&quot;, Monaco, monospace;&#92;n      font-size: 13px;&#92;n      color: #d73a49;&#92;n    }&#92;n    &#92;n    .agent-response-content pre {&#92;n      background: #1e1e1e;&#92;n      color: #d4d4d4;&#92;n      padding: 16px;&#92;n      border-radius: 6px;&#92;n      overflow-x: auto;&#92;n      margin: 12px 0;&#92;n    }&#92;n    &#92;n    .agent-response-content pre code {&#92;n      background: none;&#92;n      color: inherit;&#92;n      padding: 0;&#92;n    }&#92;n    &#92;n    .agent-error {&#92;n      color: #dc2626;&#92;n      background: #fef2f2;&#92;n      padding: 12px;&#92;n      border-left: 3px solid #dc2626;&#92;n      border-radius: 4px;&#92;n    }&#92;n    &quot;' data-buffer-paths='[]'></marimo-anywidget></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    }
+  ]
+}

@@ -24,6 +24,20 @@ Interactive marimo notebooks demonstrating all Ontonaut features.
   - Custom handler implementation
   - Environment variable setup
 
+### Indexing & Search
+- **[04-indexing-search.py](./04-indexing-search.py)** - Codebase indexing system
+  - Type registration with @index_type
+  - Custom tag taxonomies
+  - Search by query and tags
+  - Metadata extraction and inspection
+
+### AI Codebase Agent
+- **[05-codebase-agent-demo.py](./05-codebase-agent-demo.py)** - AI agent for code search ⚡ **START HERE!**
+  - Ask questions about your codebase
+  - AI-powered answers with code snippets
+  - Works with OpenAI or custom AI clients
+  - Smart context building from indexed types
+
 ## 🚀 Running Notebooks
 
 ### Install Marimo

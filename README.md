@@ -25,6 +25,13 @@ Ontonaut provides beautiful, marimo-compatible widgets for code execution and AI
 - 🤖 **Multiple handlers** - OpenAI, Anthropic, MCP, or custom
 - 🎯 **Type-safe** - Full type hints throughout
 
+### CodebaseAgent Widget ✨ NEW
+- 🔍 **AI-powered code search** - Ask questions, get relevant code snippets
+- 🏷️ **Smart indexing** - Register types with tags and metadata
+- 📚 **Auto-extraction** - Docstrings, methods, properties extracted automatically
+- 🤖 **Bring your own AI** - Works with OpenAI, Anthropic, or custom company wrappers
+- 🎯 **Context-aware** - Builds intelligent context from your codebase
+
 ## 📦 Installation
 
 ```bash
@@ -60,6 +67,35 @@ chatbot = ChatBot(
 chatbot
 ```
 
+### CodebaseAgent
+
+```python
+from ontonaut import CodebaseAgent, index_type, IndexTag
+import openai
+import os
+
+# 1. Define tags and register your types
+class MyTags(IndexTag):
+    DATABASE = "database"
+    API = "api"
+
+@index_type(tags=[MyTags.DATABASE], instructions="User authentication model")
+class User:
+    """User model with authentication."""
+    def authenticate(self, password: str) -> bool:
+        """Verify user credentials."""
+        return True
+
+# 2. Create agent with your AI client
+agent = CodebaseAgent(
+    ai_client=openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY")),
+    theme="light"
+)
+
+# 3. Ask questions - AI searches your codebase and explains!
+agent
+```
+
 ## 📚 Documentation
 
 ### 📖 User Guides
@@ -79,9 +115,15 @@ Runnable marimo notebooks with examples:
 - **[Getting Started](./book/marimo/01-getting-started.py)** - Basic usage
 - **[ChatBot Guide](./book/marimo/02-chatbot-guide.py)** - Complete chat examples
 - **[OpenAI Integration](./book/marimo/03-openai-integration.py)** - AI integration
+- **[Indexing & Search](./book/marimo/04-indexing-search.py)** - Codebase indexing
+- **[CodebaseAgent Demo](./book/marimo/05-codebase-agent-demo.py)** - AI code search ⚡ **QUICKEST START!**
 
 Run them:
 ```bash
+# Start with the CodebaseAgent demo (requires OPENAI_API_KEY in .env)
+marimo edit book/marimo/05-codebase-agent-demo.py
+
+# Or start with basics
 marimo edit book/marimo/01-getting-started.py
 ```
 
