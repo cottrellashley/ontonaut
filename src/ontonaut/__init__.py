@@ -1,6 +1,6 @@
 """Ontonaut - Customizable widgets for marimo with pluggable execution backends."""
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __author__ = "Ashley Cottrell"
 __email__ = "your.email@example.com"
 
