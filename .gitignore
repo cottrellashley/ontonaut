@@ -137,3 +137,6 @@ dmypy.json
 # Project specific
 *.db
 *.sqlite
+
+# Marimo
+__marimo__
