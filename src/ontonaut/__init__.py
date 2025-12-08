@@ -6,6 +6,7 @@ __email__ = "your.email@example.com"
 
 # Code Editor
 # Chat Bot
+from ontonaut.agent_tools import AgentTools
 from ontonaut.chatbot import ChatBot
 from ontonaut.codebase_agent import CodebaseAgent
 from ontonaut.editor import CodeEditor
@@ -30,6 +31,7 @@ from ontonaut.indexing import (
     register_type,
     search_registry,
 )
+from ontonaut.iterative_agent import IterativeCodebaseAgent
 
 __all__ = [
     # Editor
@@ -47,6 +49,8 @@ __all__ = [
     "create_handler",
     # Codebase Agent
     "CodebaseAgent",
+    "IterativeCodebaseAgent",
+    "AgentTools",
     # Indexing
     "register_type",
     "index_type",

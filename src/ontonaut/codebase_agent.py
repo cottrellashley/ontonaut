@@ -12,6 +12,7 @@ import anywidget
 import traitlets
 
 from ontonaut.indexing import RegisteredType
+from ontonaut.iterative_agent import IterativeCodebaseAgent
 
 
 class CodebaseAgent(anywidget.AnyWidget):
@@ -319,6 +320,54 @@ class CodebaseAgent(anywidget.AnyWidget):
       border-left: 3px solid #dc2626;
       border-radius: 4px;
     }
+
+    /* Iterative Agent Styles */
+    .agent-iteration {
+      font-weight: 600;
+      color: #10b981;
+      margin: 16px 0 8px 0;
+      padding: 8px;
+      background: #f0fdf4;
+      border-left: 3px solid #10b981;
+      border-radius: 4px;
+    }
+
+    .agent-thinking {
+      background: #f3f4f6;
+      padding: 12px;
+      margin: 8px 0;
+      border-left: 3px solid #6b7280;
+      border-radius: 4px;
+      font-size: 13px;
+      white-space: pre-wrap;
+    }
+
+    .agent-action {
+      background: #dbeafe;
+      padding: 12px;
+      margin: 8px 0;
+      border-left: 3px solid #3b82f6;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+
+    .agent-observation {
+      background: #fef3c7;
+      padding: 12px;
+      margin: 8px 0;
+      border-left: 3px solid #f59e0b;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    .agent-observation pre {
+      background: #fffbeb;
+      padding: 8px;
+      border-radius: 3px;
+      overflow-x: auto;
+      margin: 8px 0 0 0;
+      font-size: 11px;
+    }
     """
 
     # Traitlets
@@ -335,6 +384,8 @@ class CodebaseAgent(anywidget.AnyWidget):
         query: str = "",
         placeholder: str = "Ask about your codebase...",
         theme: str = "light",
+        iterative: bool = False,
+        max_iterations: int = 5,
         **kwargs: Any,
     ) -> None:
         """
@@ -345,6 +396,8 @@ class CodebaseAgent(anywidget.AnyWidget):
             query: Initial query
             placeholder: Placeholder text for input
             theme: UI theme ("light" or "dark")
+            iterative: Whether to use iterative agent mode (default: True)
+            max_iterations: Maximum iterations for iterative mode (default: 5)
             **kwargs: Additional widget arguments
         """
         super().__init__(**kwargs)
@@ -352,6 +405,8 @@ class CodebaseAgent(anywidget.AnyWidget):
         self.query = query
         self.placeholder = placeholder
         self.theme = theme
+        self.iterative = iterative
+        self.max_iterations = max_iterations
         self._is_processing = False  # Flag to prevent concurrent processing
 
         # Register message handler
@@ -780,25 +835,92 @@ Use markdown formatting for code blocks."""
             # Clear previous state
             self.error = ""
             self.response = ""
+            self.context = ""
 
-            # Search codebase
-            relevant_types = self._search_codebase(query)
-
-            # Build and display context
-            self.context = self._build_context_html(relevant_types)
-
-            # Build context for AI
-            ai_context = self._build_context_for_ai(relevant_types)
-
-            # Stream AI response
-            response_parts = []
-            for chunk in self._stream_ai_response(query, ai_context):
-                response_parts.append(chunk)
-                # Convert markdown to HTML for display
-                self.response = self._markdown_to_html("".join(response_parts))
+            if self.iterative:
+                # Use iterative agent mode
+                self._process_with_iterative_agent(query)
+            else:
+                # Use simple single-shot mode
+                self._process_with_simple_search(query)
 
         except Exception as e:
             self.error = f"Error processing question: {str(e)}"
+
+    def _process_with_simple_search(self, query: str) -> None:
+        """Process question with simple single-shot search (original behavior)."""
+        # Search codebase
+        relevant_types = self._search_codebase(query)
+
+        # Build and display context
+        self.context = self._build_context_html(relevant_types)
+
+        # Build context for AI
+        ai_context = self._build_context_for_ai(relevant_types)
+
+        # Stream AI response
+        response_parts = []
+        for chunk in self._stream_ai_response(query, ai_context):
+            response_parts.append(chunk)
+            # Convert markdown to HTML for display
+            self.response = self._markdown_to_html("".join(response_parts))
+
+    def _process_with_iterative_agent(self, query: str) -> None:
+        """Process question with iterative agent that can search multiple times."""
+        if not self.ai_client:
+            self.error = "❌ No AI client provided. Cannot use iterative mode."
+            return
+
+        # Create iterative agent
+        agent = IterativeCodebaseAgent(
+            ai_client=self.ai_client,
+            max_iterations=self.max_iterations,
+            verbose=True,
+        )
+
+        # Track all actions for context display
+        actions_log = []
+        response_parts = []
+
+        # Run agent loop
+        for update in agent.solve(query):
+            update_type = update["type"]
+            content = update["content"]
+            update.get("iteration", 0)
+
+            if update_type == "iteration_start":
+                # Show iteration number
+                actions_log.append(f"<div class='agent-iteration'>🔄 {content}</div>")
+
+            elif update_type == "thinking":
+                # Show agent's reasoning
+                actions_log.append(
+                    f"<div class='agent-thinking'><strong>💭 Thinking:</strong><br>{self._escape_html(content)}</div>"
+                )
+
+            elif update_type == "action":
+                # Show tool usage
+                actions_log.append(
+                    f"<div class='agent-action'><strong>🔧 Action:</strong> {self._escape_html(content)}</div>"
+                )
+
+            elif update_type == "observation":
+                # Show tool results (truncated for display)
+                truncated = content[:500] + "..." if len(content) > 500 else content
+                actions_log.append(
+                    f"<div class='agent-observation'><strong>👁️ Observation:</strong><pre>{self._escape_html(truncated)}</pre></div>"
+                )
+
+            elif update_type == "final_answer":
+                # Show final answer
+                response_parts.append(content)
+
+            # Update context with actions log
+            self.context = "".join(actions_log)
+
+            # Update response with final answer
+            if response_parts:
+                self.response = self._markdown_to_html("".join(response_parts))
 
     def _markdown_to_html(self, markdown: str) -> str:
         """
@@ -834,6 +956,16 @@ Use markdown formatting for code blocks."""
         html = html.replace("\n", "<br>")
 
         return html
+
+    def _escape_html(self, text: str) -> str:
+        """Escape HTML special characters."""
+        return (
+            text.replace("&", "&amp;")
+            .replace("<", "&lt;")
+            .replace(">", "&gt;")
+            .replace('"', "&quot;")
+            .replace("'", "&#39;")
+        )
 
     def ask(self, query: str) -> None:
         """

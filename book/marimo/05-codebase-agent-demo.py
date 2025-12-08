@@ -8,7 +8,6 @@ app = marimo.App()
 
 @app.cell
 def _():
-
     return
 
 
@@ -105,9 +104,20 @@ def _():
 
 
 @app.cell
-def _(agent):
+def _():
     # The agent is ready to use!
-    return (agent,)
+    return
+
+
+@app.cell
+def _(agent):
+    agent
+    return
+
+
+@app.cell
+def _():
+    return
 
 
 @app.cell
