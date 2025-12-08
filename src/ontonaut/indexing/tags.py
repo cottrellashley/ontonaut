@@ -23,7 +23,7 @@ class IndexTag(str, Enum):
     """
 
     def __str__(self) -> str:
-        return self.value
+        return self.value  # type: ignore[no-any-return]
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}.{self.name}"
@@ -38,7 +38,7 @@ class IndexTag(str, Enum):
 
     def __eq__(self, other: Any) -> bool:
         if isinstance(other, str):
-            return self.value == other
+            return self.value == other  # type: ignore[no-any-return]
         return super().__eq__(other)
 
     def __hash__(self) -> int:

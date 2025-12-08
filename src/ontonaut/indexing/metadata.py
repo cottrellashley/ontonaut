@@ -53,11 +53,11 @@ def get_type_from_path(path: str) -> type:
     # Get the type from the module
     # Handle nested classes
     type_parts = type_name.split(".")
-    obj = module
+    obj: Any = module
     for part in type_parts:
         obj = getattr(obj, part)
 
-    return obj
+    return obj  # type: ignore[no-any-return]
 
 
 def extract_docstring(obj: Any) -> str:

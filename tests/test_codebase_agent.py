@@ -1,6 +1,7 @@
 """Tests for CodebaseAgent widget."""
 
 import pytest
+
 from ontonaut import CodebaseAgent, IndexTag, clear_registry, index_type
 
 

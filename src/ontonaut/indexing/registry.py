@@ -3,7 +3,7 @@ Thread-safe registry for indexed types.
 """
 
 import threading
-from typing import Callable
+from typing import Callable, Optional, Union
 
 from ontonaut.indexing.registered_type import RegisteredType
 from ontonaut.indexing.tags import IndexTag
@@ -21,7 +21,7 @@ class TypeRegistry:
     def register(
         self,
         cls: type,
-        tags: list[IndexTag] | None = None,
+        tags: Optional[list[IndexTag]] = None,
         instructions: str = "",
     ) -> RegisteredType:
         """
@@ -40,7 +40,7 @@ class TypeRegistry:
             self._registry[registered.cls_path] = registered
             return registered
 
-    def unregister(self, cls: type | str) -> None:
+    def unregister(self, cls: Union[type, str]) -> None:
         """
         Unregister a type from the registry.
 
@@ -58,7 +58,7 @@ class TypeRegistry:
             if path in self._registry:
                 del self._registry[path]
 
-    def get(self, cls: type | str) -> RegisteredType | None:
+    def get(self, cls: Union[type, str]) -> Optional[RegisteredType]:
         """
         Get a registered type.
 
@@ -85,8 +85,8 @@ class TypeRegistry:
 
     def search(
         self,
-        query: str | None = None,
-        tags: list[IndexTag | str] | None = None,
+        query: Optional[str] = None,
+        tags: Optional[list[Union[IndexTag, str]]] = None,
         require_all_tags: bool = False,
     ) -> list[RegisteredType]:
         """
@@ -135,7 +135,7 @@ class TypeRegistry:
         with self._lock:
             return len(self._registry)
 
-    def __contains__(self, cls: type | str) -> bool:
+    def __contains__(self, cls: Union[type, str]) -> bool:
         return self.get(cls) is not None
 
     def __repr__(self) -> str:
@@ -149,7 +149,7 @@ _index_register = TypeRegistry()
 
 def register_type(
     typ: type,
-    tags: list[IndexTag] | None = None,
+    tags: Optional[list[IndexTag]] = None,
     instructions: str = "",
 ) -> RegisteredType:
     """
@@ -187,11 +187,11 @@ def register_type(
 
 
 def index_type(
-    cls: type | None = None,
+    cls: Optional[type] = None,
     *,
-    tags: list[IndexTag] | None = None,
+    tags: Optional[list[IndexTag]] = None,
     instructions: str = "",
-) -> Callable[[type], type] | type:
+    ) -> Union[Callable[[type], type], type]:
     """
     Register a type in the index (decorator style).
 
@@ -252,8 +252,8 @@ def clear_registry() -> None:
 
 
 def search_registry(
-    query: str | None = None,
-    tags: list[IndexTag | str] | None = None,
+    query: Optional[str] = None,
+    tags: Optional[list[Union[IndexTag, str]]] = None,
     require_all_tags: bool = False,
 ) -> list[RegisteredType]:
     """

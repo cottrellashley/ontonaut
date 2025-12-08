@@ -335,8 +335,8 @@ class CodebaseAgent(anywidget.AnyWidget):
         query: str = "",
         placeholder: str = "Ask about your codebase...",
         theme: str = "light",
-        **kwargs,
-    ):
+        **kwargs: Any,
+    ) -> None:
         """
         Initialize codebase agent.
 
@@ -357,7 +357,7 @@ class CodebaseAgent(anywidget.AnyWidget):
         # Register message handler
         self.on_msg(self._handle_message)
 
-    def _handle_message(self, widget, content, buffers):
+    def _handle_message(self, widget: Any, content: dict, buffers: list) -> None:
         """Handle messages from frontend."""
         msg_type = content.get("type")
 

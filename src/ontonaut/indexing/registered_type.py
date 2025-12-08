@@ -2,7 +2,7 @@
 RegisteredType class that holds metadata about indexed types.
 """
 
-from typing import Any
+from typing import Any, Optional, Union
 
 from ontonaut.indexing.metadata import (
     extract_type_metadata,
@@ -27,7 +27,7 @@ class RegisteredType:
     def __init__(
         self,
         cls: type,
-        tags: list[IndexTag] | None = None,
+        tags: Optional[list[IndexTag]] = None,
         instructions: str = "",
     ):
         """
@@ -53,22 +53,22 @@ class RegisteredType:
     @property
     def cls_path(self) -> str:
         """Get the fully qualified path of the type."""
-        return self._metadata["path"]
+        return self._metadata["path"]  # type: ignore[no-any-return]
 
     @property
     def name(self) -> str:
         """Get the simple name of the type."""
-        return self._metadata["name"]
+        return self._metadata["name"]  # type: ignore[no-any-return]
 
     @property
     def qualname(self) -> str:
         """Get the qualified name (includes parent classes)."""
-        return self._metadata["qualname"]
+        return self._metadata["qualname"]  # type: ignore[no-any-return]
 
     @property
     def module(self) -> str:
         """Get the module name."""
-        return self._metadata["module"]
+        return self._metadata["module"]  # type: ignore[no-any-return]
 
     @property
     def tags(self) -> list[IndexTag]:
@@ -83,12 +83,12 @@ class RegisteredType:
     @property
     def docstring(self) -> str:
         """Get the class docstring."""
-        return self._metadata["docstring"]
+        return self._metadata["docstring"]  # type: ignore[no-any-return]
 
     @property
     def bases(self) -> list[str]:
         """Get the base class paths."""
-        return self._metadata["bases"]
+        return self._metadata["bases"]  # type: ignore[no-any-return]
 
     @property
     def methods(self) -> dict[str, dict[str, Any]]:
@@ -107,7 +107,7 @@ class RegisteredType:
                 }
             }
         """
-        return self._metadata["methods"]
+        return self._metadata["methods"]  # type: ignore[no-any-return]
 
     @property
     def properties(self) -> dict[str, dict[str, Any]]:
@@ -124,17 +124,17 @@ class RegisteredType:
                 }
             }
         """
-        return self._metadata["properties"]
+        return self._metadata["properties"]  # type: ignore[no-any-return]
 
     @property
     def attributes(self) -> dict[str, Any]:
         """Get all class-level attributes."""
-        return self._metadata["attributes"]
+        return self._metadata["attributes"]  # type: ignore[no-any-return]
 
     @property
     def is_abstract(self) -> bool:
         """Check if the type is abstract."""
-        return self._metadata["is_abstract"]
+        return self._metadata["is_abstract"]  # type: ignore[no-any-return]
 
     @property
     def metadata(self) -> dict[str, Any]:
@@ -145,7 +145,7 @@ class RegisteredType:
             "instructions": self._instructions,
         }
 
-    def has_tag(self, tag: IndexTag | str) -> bool:
+    def has_tag(self, tag: Union[IndexTag, str]) -> bool:
         """
         Check if this type has a specific tag.
 
@@ -158,7 +158,7 @@ class RegisteredType:
         tag_str = str(tag)
         return any(str(t) == tag_str for t in self._tags)
 
-    def has_any_tag(self, tags: list[IndexTag | str]) -> bool:
+    def has_any_tag(self, tags: list[Union[IndexTag, str]]) -> bool:
         """
         Check if this type has any of the specified tags.
 
@@ -170,7 +170,7 @@ class RegisteredType:
         """
         return any(self.has_tag(tag) for tag in tags)
 
-    def has_all_tags(self, tags: list[IndexTag | str]) -> bool:
+    def has_all_tags(self, tags: list[Union[IndexTag, str]]) -> bool:
         """
         Check if this type has all of the specified tags.
 
@@ -236,7 +236,7 @@ class RegisteredType:
     def from_path(
         cls,
         path: str,
-        tags: list[IndexTag] | None = None,
+        tags: Optional[list[IndexTag]] = None,
         instructions: str = "",
     ) -> "RegisteredType":
         """

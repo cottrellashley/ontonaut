@@ -1,6 +1,7 @@
 """Tests for the indexing system."""
 
 import pytest
+
 from ontonaut import (
     IndexTag,
     RegisteredType,
